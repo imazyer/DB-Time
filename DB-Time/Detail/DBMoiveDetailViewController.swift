@@ -32,6 +32,7 @@ class DBMoiveDetailViewController: DBBaseViewController {
         tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.registerNib(DBMovieInfoViewCell.self)
         tableView.register(DBMovieSummaryCell.self)
         tableView.registerNib(DBMovieMembersViewCell.self)
         tableView.estimatedRowHeight = 60
@@ -49,6 +50,7 @@ class DBMoiveDetailViewController: DBBaseViewController {
     }
     
     func getMovieDetail(_ id: String) {
+        guard detailModel == nil else { return  }
         DBNetworkProvider.rx.request(.movieDetail(id))
             .mapObject(DBMovieSubject.self)
             .subscribe(onSuccess: { [weak self] data in
@@ -82,8 +84,8 @@ extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
-            cell.configWithText(movie?.title)
+            let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
+//            cell.configWithText(movie?.title)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)

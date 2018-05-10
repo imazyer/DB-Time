@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.2)
+  - Cosmos (15.0.0)
   - Differentiator (3.0.2)
   - Hero (1.2.0)
   - Kingfisher (4.7.0)
@@ -25,6 +26,7 @@ PODS:
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - Cosmos
   - Hero
   - Kingfisher
   - Moya
@@ -38,6 +40,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - Cosmos
     - Differentiator
     - Hero
     - Kingfisher
@@ -52,6 +55,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
@@ -64,6 +68,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 8c6c51facc9c82e81754b4618e058b89b0bb9209
+PODFILE CHECKSUM: 2ce374d9d6dc0b488d3ac69cd95fc8abc4781561
 
 COCOAPODS: 1.5.0
