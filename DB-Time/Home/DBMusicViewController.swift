@@ -16,7 +16,6 @@ class DBMusicViewController: DBBaseViewController {
         view.backgroundColor = UIColor.random()
         navigationItem.title = "音乐"
         
-        
         let leftBarItemButton = UIButton(type: .system)
         leftBarItemButton.frame.size = CGSize(width: 50, height: 30)
         leftBarItemButton.setImage(#imageLiteral(resourceName: "Category"), for: .normal)

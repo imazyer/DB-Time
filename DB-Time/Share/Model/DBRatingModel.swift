@@ -29,6 +29,7 @@ struct DBMovie: Mappable {
 }
 
 struct DBMovieSubject: Mappable {
+    
     var rating: DBRatingModel!
     var genres: [String] = []
     var title: String = ""
@@ -41,6 +42,10 @@ struct DBMovieSubject: Mappable {
     var images: DBAvatar!
     var alt: String = ""
     var id: String = ""
+    
+    var mobileUrl: String?
+    var countries: [String]?
+    var summary: String?
     
     init?(map: Map) {
     }
@@ -59,6 +64,10 @@ struct DBMovieSubject: Mappable {
         images <- map["images"]
         alt <- map["alt"]
         id <- map["id"]
+        
+        mobileUrl <- map["mobile_url"]
+        countries <- map["countries"]
+        summary <- map["summary"]
     }
 }
 

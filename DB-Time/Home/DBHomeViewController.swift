@@ -20,7 +20,7 @@ class DBHomeViewController: DBBaseViewController {
     // 当前card在数组中的索引
     private var currentCardIndex: Int = 0
     private var dataSource: [DBMovieSubject] = []
-    private var tableView: UITableView!
+    private var detailVC = DBMoiveDetailViewController()
     private var isShowing: Bool = false
     let popListView = DBPopupMovieTypeView()
     
@@ -52,10 +52,8 @@ class DBHomeViewController: DBBaseViewController {
         swipeableView.allowedDirection = [.horizontal, .up]
         swipeableView.numberOfActiveView = 3
         swipeableView.onlySwipeTopCard = true
-        
-        tableView = UITableView(frame: .zero, style: .plain)
-        tableView.register(UITableViewCell.self)
-        tableView.dataSource = self
+
+        self.addChildViewController(detailVC)
         
 //        setupSwipeableViewDelegate()
         requestData()
@@ -66,20 +64,15 @@ class DBHomeViewController: DBBaseViewController {
             UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                 cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
             }, completion: { (_) in
-                if cardView.subviews.contains(self.tableView) {
-                    self.tableView.removeFromSuperview()
+                if cardView.subviews.contains(self.detailVC.view) {
+                    self.detailVC.view?.removeFromSuperview()
                 } else {
-                    self.tableView.frame = cardView.bounds
+                    self.detailVC.view.frame = cardView.bounds
                     if let movie = cardView.cardMovie {
-                        let headerView = UIView.loadFromNibAndClass(DBMovieHeaderView.self)
-                        headerView?.frame = CGRect(x: 0, y: 0, width: cardView.bounds.width, height: cardView.bounds.width / 2)
-                        headerView?.layoutIfNeeded()
-                        headerView?.castModels = Observable.just(movie.casts)
-                        self.tableView.tableHeaderView = headerView
-                        self.getMovieDetail(movie.id)
-                        print(movie)
+                        self.detailVC.movie = movie
+                        self.detailVC.view.layoutIfNeeded()
+                        cardView.addSubview(self.detailVC.view)
                     }
-                    cardView.addSubview(self.tableView)
                 }
                 UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                     cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
@@ -137,17 +130,6 @@ class DBHomeViewController: DBBaseViewController {
         
     }
     
-    func getMovieDetail(_ id: String) {
-        DBNetworkProvider.rx.request(.movieDetail(id))
-            .mapObject(DBMovieSubject.self)
-            .subscribe(onSuccess: { data in
-                // 数据处理
-                print(data)
-            }, onError: { error in
-                print("数据请求失败! 错误原因: ", error)
-            }).disposed(by: disposeBag)
-    }
-    
     func loadNextView() {
         
         swipeableView.nextView = {
@@ -199,18 +181,7 @@ class DBHomeViewController: DBBaseViewController {
     }
 }
 
-extension DBHomeViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: UITableViewCell.self, for: indexPath)
-        cell.textLabel?.text = "---\(indexPath.row)---"
-        return cell
-    }
-}
+
 
 // MARK: - SwipeableViewDelegate
 /*
