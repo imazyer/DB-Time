@@ -16,7 +16,6 @@ class DBMovieMembersViewCell: UITableViewCell {
     
     func configWithCasts(_ casts: [DBCastModel]) {
         castModels = casts
-        print(casts)
         collectionView.reloadData()
     }
     
@@ -31,7 +30,6 @@ class DBMovieMembersViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         let width = bounds.height * 0.618
         let height: CGFloat = bounds.height
         flowLayout.itemSize = CGSize(width: width, height:height)
