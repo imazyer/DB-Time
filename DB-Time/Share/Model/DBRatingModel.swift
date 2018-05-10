@@ -33,11 +33,11 @@ struct DBMovieSubject: Mappable {
     var rating: DBRatingModel!
     var genres: [String] = []
     var title: String = ""
-    var casts: [DBCastModel] = []
+    var casts: [DBCastModel]!
     var collectCount: Int64 = 0
     var originalTitle: String = ""
     var subtype: String = ""
-    var directors: [DBCastModel] = []
+    var directors: [DBCastModel]!
     var year: String = ""
     var images: DBAvatar!
     var alt: String = ""
@@ -71,18 +71,19 @@ struct DBMovieSubject: Mappable {
     }
 }
 
-struct DBCastModel: Mappable {
+class DBCastModel: Mappable {
     
     var alt: String = ""
     var name: String = ""
-    var id: Int64 = 0
+    var id: String = ""
     var avatars: DBAvatar!
+    var role: String = "演员"
     
-    init?(map: Map) {
+    required init?(map: Map) {
     }
     
     // Mappable
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         alt <- map["alt"]
         name <- map["name"]
         id <- map["id"]

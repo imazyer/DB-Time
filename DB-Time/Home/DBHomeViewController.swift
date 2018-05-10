@@ -70,7 +70,6 @@ class DBHomeViewController: DBBaseViewController {
                     self.detailVC.view.frame = cardView.bounds
                     if let movie = cardView.cardMovie {
                         self.detailVC.movie = movie
-                        self.detailVC.view.layoutIfNeeded()
                         cardView.addSubview(self.detailVC.view)
                     }
                 }

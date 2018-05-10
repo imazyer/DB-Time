@@ -52,7 +52,7 @@ class DBMovieHeaderViewCell: UICollectionViewCell {
     private var actorNameLabel: UILabel =  UILabel()
     
     func setupWithImageCast(_ cast: DBCastModel) {
-        photoImageView.setImage(with: URL(string: cast.avatars.medium))
+//        photoImageView.setImage(with: URL(string: cast.avatars.medium))
         actorNameLabel.text = cast.name
         actorNameLabel.sizeToFit()
     }

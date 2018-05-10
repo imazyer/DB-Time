@@ -60,6 +60,8 @@
 		6492079B20A419A20016F52B /* DBMovieDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6492079A20A419A20016F52B /* DBMovieDetailHeaderView.xib */; };
 		6492079E20A426220016F52B /* DBMovieMembersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492079C20A426220016F52B /* DBMovieMembersViewCell.swift */; };
 		6492079F20A426220016F52B /* DBMovieMembersViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6492079D20A426220016F52B /* DBMovieMembersViewCell.xib */; };
+		649207A220A428680016F52B /* DBMovieMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649207A020A428680016F52B /* DBMovieMemberCollectionViewCell.swift */; };
+		649207A320A428680016F52B /* DBMovieMemberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 649207A120A428680016F52B /* DBMovieMemberCollectionViewCell.xib */; };
 		64C36D21209DCB56002D4EA3 /* DBMovieHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C36D20209DCB56002D4EA3 /* DBMovieHeaderView.swift */; };
 		64C36D23209DCB5D002D4EA3 /* DBMovieHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64C36D22209DCB5D002D4EA3 /* DBMovieHeaderView.xib */; };
 		64C36D25209E9976002D4EA3 /* DBPopupMovieTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C36D24209E9976002D4EA3 /* DBPopupMovieTypeView.swift */; };
@@ -152,6 +154,8 @@
 		6492079A20A419A20016F52B /* DBMovieDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieDetailHeaderView.xib; sourceTree = "<group>"; };
 		6492079C20A426220016F52B /* DBMovieMembersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieMembersViewCell.swift; sourceTree = "<group>"; };
 		6492079D20A426220016F52B /* DBMovieMembersViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieMembersViewCell.xib; sourceTree = "<group>"; };
+		649207A020A428680016F52B /* DBMovieMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		649207A120A428680016F52B /* DBMovieMemberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieMemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		64C36D20209DCB56002D4EA3 /* DBMovieHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieHeaderView.swift; sourceTree = "<group>"; };
 		64C36D22209DCB5D002D4EA3 /* DBMovieHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieHeaderView.xib; sourceTree = "<group>"; };
 		64C36D24209E9976002D4EA3 /* DBPopupMovieTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPopupMovieTypeView.swift; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 				64C36D24209E9976002D4EA3 /* DBPopupMovieTypeView.swift */,
 				6492079C20A426220016F52B /* DBMovieMembersViewCell.swift */,
 				6492079D20A426220016F52B /* DBMovieMembersViewCell.xib */,
+				649207A020A428680016F52B /* DBMovieMemberCollectionViewCell.swift */,
+				649207A120A428680016F52B /* DBMovieMemberCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 				6453E346209AE6CE00220CFE /* Main.storyboard in Resources */,
 				6470CA89209C5563008A1938 /* DBMovieCardView.xib in Resources */,
 				6492079F20A426220016F52B /* DBMovieMembersViewCell.xib in Resources */,
+				649207A320A428680016F52B /* DBMovieMemberCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,6 +751,7 @@
 				6470CA87209C5555008A1938 /* DBMovieCardView.swift in Sources */,
 				64CC438A209D5FBE0070902C /* FlipDismissAnimationController.swift in Sources */,
 				6470CA80209C4B7C008A1938 /* Single+Response.swift in Sources */,
+				649207A220A428680016F52B /* DBMovieMemberCollectionViewCell.swift in Sources */,
 				6453E393209AF73A00220CFE /* ViewManager.swift in Sources */,
 				6453E378209AED5300220CFE /* DBNavigationController.swift in Sources */,
 				6453E341209AE6CE00220CFE /* AppDelegate.swift in Sources */,

@@ -22,18 +22,18 @@ class DBMoiveDetailViewController: DBBaseViewController {
         didSet {
             headerView.setupWithImage(movie!.images)
             tableView.reloadData()
-            
             getMovieDetail(movie!.id)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.layoutIfNeeded()
         
         tableView = UITableView(frame: view.bounds, style: .grouped)
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
         tableView.register(DBMovieSummaryCell.self)
+        tableView.registerNib(DBMovieMembersViewCell.self)
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = 0.001
@@ -46,9 +46,6 @@ class DBMoiveDetailViewController: DBBaseViewController {
         })
         
         tableView.tableHeaderView = headerView
-        
-        tableView.reloadData()
-        
     }
     
     func getMovieDetail(_ id: String) {
@@ -67,7 +64,7 @@ class DBMoiveDetailViewController: DBBaseViewController {
 extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,11 +72,11 @@ extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.001 : 34
+        return section == 2 ? 34 : 0.001
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "" : "剧情简介"
+        return section == 2 ? "剧情简介" : ""
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,6 +84,20 @@ extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegat
         case 0:
             let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
             cell.configWithText(movie?.title)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
+            if let directors = detailModel?.directors,  let casts = movie?.casts  {
+                let directors = directors.map({ (model) -> DBCastModel in
+                    model.role = "导演"
+                    return model
+                })
+                cell.configWithCasts(directors + casts)
+            } else {
+                if let casts = movie?.casts {
+                    cell.configWithCasts(casts)
+                }
+            }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
