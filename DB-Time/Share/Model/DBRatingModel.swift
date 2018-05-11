@@ -43,6 +43,8 @@ struct DBMovieSubject: Mappable {
     var alt: String = ""
     var id: String = ""
     
+    var wishCount: Int64 = 0
+    var ratingsCount: Int64 = 0
     var mobileUrl: String?
     var countries: [String]?
     var summary: String?
@@ -65,6 +67,8 @@ struct DBMovieSubject: Mappable {
         alt <- map["alt"]
         id <- map["id"]
         
+        wishCount <- map["wish_count"]
+        ratingsCount <- map["ratings_count"]
         mobileUrl <- map["mobile_url"]
         countries <- map["countries"]
         summary <- map["summary"]

@@ -16,13 +16,13 @@ class DBMoiveDetailViewController: DBBaseViewController {
     private var tableView: UITableView!
     private var headerView = UIView.loadFromNibAndClass(DBMovieDetailHeaderView.self)!
     
-    var detailModel: DBMovieSubject?
+//    var detailModel: DBMovieSubject?
     
     var movie: DBMovieSubject? {
         didSet {
             headerView.setupWithImage(movie!.images)
             tableView.reloadData()
-            getMovieDetail(movie!.id)
+//            getMovieDetail(movie!.id)
         }
     }
     
@@ -49,18 +49,18 @@ class DBMoiveDetailViewController: DBBaseViewController {
         tableView.tableHeaderView = headerView
     }
     
-    func getMovieDetail(_ id: String) {
-        guard detailModel == nil else { return  }
-        DBNetworkProvider.rx.request(.movieDetail(id))
-            .mapObject(DBMovieSubject.self)
-            .subscribe(onSuccess: { [weak self] data in
-                // 数据处理
-                self?.detailModel = data
-                self?.tableView.reloadData()
-            }, onError: { error in
-                print("数据请求失败! 错误原因: ", error)
-            }).disposed(by: disposeBag)
-    }
+//    func getMovieDetail(_ id: String) {
+//        guard detailModel == nil else { return  }
+//        DBNetworkProvider.rx.request(.movieDetail(id))
+//            .mapObject(DBMovieSubject.self)
+//            .subscribe(onSuccess: { [weak self] data in
+//                // 数据处理
+//                self?.detailModel = data
+//                self?.tableView.reloadData()
+//            }, onError: { error in
+//                print("数据请求失败! 错误原因: ", error)
+//            }).disposed(by: disposeBag)
+//    }
 }
 
 extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -85,11 +85,13 @@ extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegat
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
-//            cell.configWithText(movie?.title)
+            if let model = movie {
+                cell.configWithMovie(model)
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
-            if let directors = detailModel?.directors,  let casts = movie?.casts  {
+            if let directors = movie?.directors,  let casts = movie?.casts  {
                 let directors = directors.map({ (model) -> DBCastModel in
                     model.role = "导演"
                     return model
@@ -103,7 +105,7 @@ extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegat
             return cell
         default:
             let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
-            cell.configWithText(detailModel?.summary)
+            cell.configWithText(movie?.summary)
             return cell
         }
     }

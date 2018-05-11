@@ -60,7 +60,9 @@ class DBHomeViewController: DBBaseViewController {
         
         swipeableView.didTap = {view, location in
             guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
-            
+            if let movieID = cardView.cardMovie?.id {
+                self.getMovieDetail(movieID)
+            }
             UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                 cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
             }, completion: { (_) in
@@ -79,6 +81,18 @@ class DBHomeViewController: DBBaseViewController {
                 })
             })
         }
+    }
+    
+    func getMovieDetail(_ id: String) {
+        DBNetworkProvider.rx.request(.movieDetail(id))
+            .mapObject(DBMovieSubject.self)
+            .subscribe(onSuccess: { [weak self] movie in
+                // 数据处理
+                self?.detailVC.movie = movie
+                self?.detailVC.view.layoutIfNeeded()
+                }, onError: { error in
+                    print("数据请求失败! 错误原因: ", error)
+            }).disposed(by: disposeBag)
     }
     
     func requestData(_ index: Int = 0) {

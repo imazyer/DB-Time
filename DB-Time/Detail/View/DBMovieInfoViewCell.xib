@@ -120,7 +120,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ydm-Uo-xfF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="0Bn-nF-T8i"/>
+                    <constraint firstItem="ydm-Uo-xfF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="0Bn-nF-T8i"/>
                     <constraint firstItem="oux-Gb-0cc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uWy-Oc-jHg" secondAttribute="trailing" constant="12" id="2aj-WQ-nAF"/>
                     <constraint firstItem="PjT-tm-Qm7" firstAttribute="top" secondItem="L9G-ks-z3I" secondAttribute="bottom" constant="12" id="3Pp-cE-64v"/>
                     <constraint firstItem="DHF-gY-RPn" firstAttribute="leading" secondItem="PjT-tm-Qm7" secondAttribute="trailing" constant="8" id="5uK-7o-6hl"/>
@@ -148,6 +148,16 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="collectCountLabel" destination="uWy-Oc-jHg" id="h46-LZ-Pfn"/>
+                <outlet property="descLabel" destination="AGm-Kt-j7o" id="6iD-Cn-uyw"/>
+                <outlet property="nameLabel" destination="ydm-Uo-xfF" id="A2N-wX-qDK"/>
+                <outlet property="originalTitleLabel" destination="24q-Oc-ldK" id="5FO-3G-XiL"/>
+                <outlet property="ratingCountLabel" destination="tSS-Fe-VeN" id="6Su-Dw-JT4"/>
+                <outlet property="ratingLabel" destination="PjT-tm-Qm7" id="Rnz-a5-Xln"/>
+                <outlet property="ratingStarView" destination="DHF-gY-RPn" id="buJ-8Z-Eep"/>
+                <outlet property="wishCountLabel" destination="oux-Gb-0cc" id="6be-CW-dfY"/>
+            </connections>
             <point key="canvasLocation" x="-347" y="431.5"/>
         </tableViewCell>
     </objects>
