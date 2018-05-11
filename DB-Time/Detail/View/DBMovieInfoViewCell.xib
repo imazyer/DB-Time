@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="后来的我们" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydm-Uo-xfF">
-                        <rect key="frame" x="16" y="12" width="87" height="29.5"/>
+                        <rect key="frame" x="16" y="20" width="87" height="21.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -147,7 +147,7 @@
                     <constraint firstItem="24q-Oc-ldK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xzl-GS-hmS"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <viewLayoutGuide key="safeArea" id="LCL-gE-ndH"/>
             <connections>
                 <outlet property="collectCountLabel" destination="uWy-Oc-jHg" id="h46-LZ-Pfn"/>
                 <outlet property="descLabel" destination="AGm-Kt-j7o" id="6iD-Cn-uyw"/>

@@ -70,11 +70,7 @@ class DBHomeViewController: DBBaseViewController {
                     self.detailVC.view?.removeFromSuperview()
                 } else {
                     self.detailVC.view.frame = cardView.bounds
-                    if let movie = cardView.cardMovie {
-                        self.detailVC.movie = movie
-                        self.detailVC.view.layoutIfNeeded()
-                        cardView.addSubview(self.detailVC.view)
-                    }
+                    cardView.addSubview(self.detailVC.view)
                 }
                 UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                     cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
@@ -84,11 +80,14 @@ class DBHomeViewController: DBBaseViewController {
     }
     
     func getMovieDetail(_ id: String) {
+        if self.detailVC.movieSubject?.id == id {
+            return
+        }
         DBNetworkProvider.rx.request(.movieDetail(id))
             .mapObject(DBMovieSubject.self)
             .subscribe(onSuccess: { [weak self] movie in
                 // 数据处理
-                self?.detailVC.movie = movie
+                self?.detailVC.bindData(movie)
                 self?.detailVC.view.layoutIfNeeded()
                 }, onError: { error in
                     print("数据请求失败! 错误原因: ", error)

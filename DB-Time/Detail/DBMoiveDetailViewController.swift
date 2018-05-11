@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class DBMoiveDetailViewController: DBBaseViewController {
     /// ARC & Rx 垃圾回收
@@ -16,14 +17,50 @@ class DBMoiveDetailViewController: DBBaseViewController {
     private var tableView: UITableView!
     private var headerView = UIView.loadFromNibAndClass(DBMovieDetailHeaderView.self)!
     
-//    var detailModel: DBMovieSubject?
-    
-    var movie: DBMovieSubject? {
-        didSet {
-            headerView.setupWithImage(movie!.images)
-            tableView.reloadData()
-//            getMovieDetail(movie!.id)
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, DBMovieSubject>>(configureCell: {
+        (dataSource, tableView, indexPath, movie) in
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
+            cell.configWithMovie(movie)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
+            let directors = movie.directors.map({ (model) -> DBCastModel in
+                model.role = "导演"
+                return model
+            })
+            cell.configWithCasts(directors + movie.casts)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
+            cell.configWithText(movie.summary)
+            return cell
         }
+    }, titleForHeaderInSection: { dataSource, sectionIndex in
+        return dataSource[sectionIndex].model
+    })
+    
+    var movieSubject: DBMovieSubject?
+    
+    func bindData(_ movie: DBMovieSubject?) {
+        guard let movie = movie else { return }
+        
+        tableView.delegate = nil
+        tableView.dataSource = nil
+        
+        movieSubject = movie
+        headerView.setupWithImage(movie.images)
+        
+        let items = Observable.just([
+            SectionModel(model: "", items: [movie]),
+            SectionModel(model: "", items: [movie]),
+            SectionModel(model: "剧情简介:", items: [movie])
+            ])
+        
+        items.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
     override func viewDidLoad() {
@@ -38,9 +75,8 @@ class DBMoiveDetailViewController: DBBaseViewController {
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = 0.001
-        
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
+    
         view.addSubview(tableView)
         tableView.snp.makeConstraints({
             $0.edges.equalToSuperview()
@@ -48,100 +84,15 @@ class DBMoiveDetailViewController: DBBaseViewController {
         
         tableView.tableHeaderView = headerView
     }
-    
-//    func getMovieDetail(_ id: String) {
-//        guard detailModel == nil else { return  }
-//        DBNetworkProvider.rx.request(.movieDetail(id))
-//            .mapObject(DBMovieSubject.self)
-//            .subscribe(onSuccess: { [weak self] data in
-//                // 数据处理
-//                self?.detailModel = data
-//                self?.tableView.reloadData()
-//            }, onError: { error in
-//                print("数据请求失败! 错误原因: ", error)
-//            }).disposed(by: disposeBag)
-//    }
 }
 
-extension DBMoiveDetailViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
+extension DBMoiveDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 2 ? 34 : 0.001
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 2 ? "剧情简介" : ""
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
-            if let model = movie {
-                cell.configWithMovie(model)
-            }
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
-            if let directors = movie?.directors,  let casts = movie?.casts  {
-                let directors = directors.map({ (model) -> DBCastModel in
-                    model.role = "导演"
-                    return model
-                })
-                cell.configWithCasts(directors + casts)
-            } else {
-                if let casts = movie?.casts {
-                    cell.configWithCasts(casts)
-                }
-            }
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
-            cell.configWithText(movie?.summary)
-            return cell
-        }
-    }
 }
 
-class DBMovieSummaryCell: UITableViewCell {
-    
-    private var detailLabel: UILabel = UILabel()
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        backgroundColor = .white
-        selectionStyle = .none
-        
-        detailLabel.numberOfLines = 0
-        detailLabel.font = UIFont.systemFont(ofSize: 14)
-        detailLabel.textColor = UIColor(hexString: "787878")
-        self.contentView.addSubview(detailLabel)
-        detailLabel.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(12)
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-12)
-        })
-    }
-    
-    func configWithText(_ text: String?) {
-        detailLabel.text = text
-        detailLabel.sizeToFit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 
 
 
