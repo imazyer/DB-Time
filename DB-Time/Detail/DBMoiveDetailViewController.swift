@@ -49,9 +49,11 @@ class DBMoiveDetailViewController: DBBaseViewController {
                 cell.avatarClickClosure = { button, index in
                     button.superview?.subviews.forEach({ $0.hero.id = nil })
                     let castVC = DBCastViewController()
+                    // hero
                     castVC.hero.isEnabled = true
                     self.navigationController?.hero.isEnabled = true
                     self.navigationController?.hero.navigationAnimationType = .fade
+                    
                     let model = (directors + movie.casts)[index]
                     castVC.castModel = model
                     button.hero.id = "avatar_id\(model.id)"

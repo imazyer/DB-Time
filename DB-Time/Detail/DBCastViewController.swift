@@ -26,16 +26,19 @@ class DBCastViewController: DBBaseViewController {
         tableView.registerNib(DBWorkTableViewCell.self)
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .white
-//        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.sectionFooterHeight = 0.001
+        tableView.contentInset.top = -20
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
  
+        navigationItem.title = castModel?.name
+        
         getCelebrityDetail(castModel?.id)
         
     }
@@ -75,7 +78,6 @@ class DBCastViewController: DBBaseViewController {
             .mapObject(DBCelebrityModel.self)
             .subscribe(onSuccess: { [weak self] celebrity in
                 // 数据处理
-                print(celebrity)
                 self?.bindData(celebrity)
                 }, onError: { error in
                     print("数据请求失败! 错误原因: ", error)
@@ -86,7 +88,7 @@ class DBCastViewController: DBBaseViewController {
 extension DBCastViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 1 ? 35 : 0.001
+        return section == 1 ? 35 : 0.0001
     }
 }
 

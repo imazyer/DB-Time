@@ -25,9 +25,29 @@ class DBWorkTableViewCell: UITableViewCell {
         nameLabel.text = model.movie.title
         starView.rating = model.movie.rating.average / 2
         ratingLabel.text = "\(model.movie.rating.average)"
-        descLabel.text = model.movie.year + "xxxx"
-        membersLabel.text = model.movie.directors.first?.name 
-        rolesLabel.text = model.roles.first
+        var country: String = ""
+        if let countries = model.movie.countries {
+            country = countries.map({ " / " + $0 }).reduce("", +)
+        }
+        descLabel.text = model.movie.year + country + model.movie.genres.map({ " / " + $0 }).reduce("", +)
+        
+        var directorString = model.movie.directors.map({ $0.name + " / " }).reduce("", +)
+        for (i, cast) in model.movie.casts.enumerated() {
+            directorString += cast.name
+            if i < model.movie.casts.count - 1 {
+                directorString += " / "
+            }
+        }        
+        membersLabel.text = directorString
+        
+        var rolesString = ""
+        for (i, role) in model.roles.enumerated() {
+            rolesString += role
+            if i < model.roles.count - 1 {
+                rolesString += " / "
+            }
+        }
+        rolesLabel.text = rolesString
     }
     
     override func awakeFromNib() {
