@@ -1,5 +1,5 @@
 //
-//  DBMoiveDetailViewController.swift
+//  DBMovieDetailViewController.swift
 //  DB-Time
 //
 //  Created by Mazy on 2018/5/5.
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class DBMoiveDetailViewController: DBBaseViewController {
+class DBMovieDetailViewController: DBBaseViewController {
 
     private var tableView: UITableView!
     private var headerView = UIView.loadFromNibAndClass(DBMovieDetailHeaderView.self)!
@@ -98,7 +98,7 @@ class DBMoiveDetailViewController: DBBaseViewController {
     }
 }
 
-extension DBMoiveDetailViewController: UITableViewDelegate {
+extension DBMovieDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 2 ? 35 : 0.001

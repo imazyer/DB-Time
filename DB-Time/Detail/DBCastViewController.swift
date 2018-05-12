@@ -15,6 +15,7 @@ class DBCastViewController: DBBaseViewController {
 
     var castModel: DBCastModel?
     private var tableView: UITableView!
+    var celebrityModel: DBCelebrityModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,6 @@ class DBCastViewController: DBBaseViewController {
     }
     
     func bindData(_ user: DBCelebrityModel) {
-        
         let items = Observable.just([
                 SectionModel(model: "", items: [0]),
                 SectionModel(model: "影视作品", items: Array(0..<user.works.count))
@@ -69,6 +69,15 @@ class DBCastViewController: DBBaseViewController {
         
         items.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
+        tableView.rx.itemSelected.subscribe(onNext: { indexPath in
+            guard let celebrity = self.celebrityModel, let movie = celebrity.works[indexPath.row].movie else {
+                return
+            }
+            let movieDetailVC = DBMovieDetailViewController()
+            movieDetailVC.movieSubject = movie
+            self.navigationController?.show(movieDetailVC, sender: nil)
+        }).disposed(by: disposeBag)
+        
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
@@ -78,6 +87,7 @@ class DBCastViewController: DBBaseViewController {
             .mapObject(DBCelebrityModel.self)
             .subscribe(onSuccess: { [weak self] celebrity in
                 // 数据处理
+                self?.celebrityModel = celebrity
                 self?.bindData(celebrity)
                 }, onError: { error in
                     print("数据请求失败! 错误原因: ", error)

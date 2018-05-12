@@ -77,7 +77,7 @@
 		64CC4388209D59DE0070902C /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC4387209D59DE0070902C /* AnimationHelper.swift */; };
 		64CC438A209D5FBE0070902C /* FlipDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC4389209D5FBE0070902C /* FlipDismissAnimationController.swift */; };
 		64CC438C209D61230070902C /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC438B209D61230070902C /* SwipeInteractionController.swift */; };
-		64CC438F209D63D90070902C /* DBMoiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC438E209D63D90070902C /* DBMoiveDetailViewController.swift */; };
+		64CC438F209D63D90070902C /* DBMovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC438E209D63D90070902C /* DBMovieDetailViewController.swift */; };
 		64CCC53120A44D6D00536357 /* DBMovieInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CCC52F20A44D6D00536357 /* DBMovieInfoViewCell.swift */; };
 		64CCC53220A44D6D00536357 /* DBMovieInfoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64CCC53020A44D6D00536357 /* DBMovieInfoViewCell.xib */; };
 		64F997A920A5EBD20074FA8E /* DBMovieSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F997A820A5EBD20074FA8E /* DBMovieSummaryCell.swift */; };
@@ -181,7 +181,7 @@
 		64CC4387209D59DE0070902C /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		64CC4389209D5FBE0070902C /* FlipDismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipDismissAnimationController.swift; sourceTree = "<group>"; };
 		64CC438B209D61230070902C /* SwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
-		64CC438E209D63D90070902C /* DBMoiveDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMoiveDetailViewController.swift; sourceTree = "<group>"; };
+		64CC438E209D63D90070902C /* DBMovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieDetailViewController.swift; sourceTree = "<group>"; };
 		64CCC52F20A44D6D00536357 /* DBMovieInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieInfoViewCell.swift; sourceTree = "<group>"; };
 		64CCC53020A44D6D00536357 /* DBMovieInfoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieInfoViewCell.xib; sourceTree = "<group>"; };
 		64F997A820A5EBD20074FA8E /* DBMovieSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieSummaryCell.swift; sourceTree = "<group>"; };
@@ -498,7 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				649207A420A44A500016F52B /* View */,
-				64CC438E209D63D90070902C /* DBMoiveDetailViewController.swift */,
+				64CC438E209D63D90070902C /* DBMovieDetailViewController.swift */,
 				6422742020A69F590030574E /* DBCastViewController.swift */,
 			);
 			path = Detail;
@@ -763,7 +763,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6453E37C209AED8B00220CFE /* DBRightSideViewController.swift in Sources */,
-				64CC438F209D63D90070902C /* DBMoiveDetailViewController.swift in Sources */,
+				64CC438F209D63D90070902C /* DBMovieDetailViewController.swift in Sources */,
 				6453E395209AF73A00220CFE /* Scheduler.swift in Sources */,
 				6453E3AF209C035900220CFE /* DBFMViewController.swift in Sources */,
 				6492079920A419980016F52B /* DBMovieDetailHeaderView.swift in Sources */,

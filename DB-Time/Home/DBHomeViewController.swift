@@ -19,7 +19,7 @@ class DBHomeViewController: DBBaseViewController {
     // 当前card在数组中的索引
     private var currentCardIndex: Int = 0
     private var dataSource: [DBMovieSubject] = []
-    private var detailVC = DBMoiveDetailViewController()
+    private var detailVC = DBMovieDetailViewController()
     private var isShowing: Bool = false
     let popListView = DBPopupMovieTypeView()
     
