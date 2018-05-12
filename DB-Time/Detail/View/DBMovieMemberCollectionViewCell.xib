@@ -19,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="165" height="219"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EAt-dW-M99">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5r-Jw-O9y">
                         <rect key="frame" x="0.0" y="0.0" width="165" height="179"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="8"/>
+                                <real key="value" value="4"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                    </imageView>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veI-Mt-kH2">
                         <rect key="frame" x="0.0" y="203" width="31" height="16"/>
                         <constraints>
@@ -48,19 +48,19 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="EAt-dW-M99" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0Ry-84-7Aa"/>
                 <constraint firstItem="7cX-X1-Hdi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QIa-Io-rij"/>
-                <constraint firstAttribute="trailing" secondItem="EAt-dW-M99" secondAttribute="trailing" id="aEL-sr-gqR"/>
+                <constraint firstItem="p5r-Jw-O9y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WSp-38-Dwr"/>
                 <constraint firstItem="veI-Mt-kH2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d4X-zV-txv"/>
-                <constraint firstItem="EAt-dW-M99" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g6d-wq-nDb"/>
+                <constraint firstItem="p5r-Jw-O9y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="dsk-3j-tXo"/>
                 <constraint firstItem="veI-Mt-kH2" firstAttribute="top" secondItem="7cX-X1-Hdi" secondAttribute="bottom" constant="1" id="h6w-ll-j3V"/>
+                <constraint firstItem="7cX-X1-Hdi" firstAttribute="top" secondItem="p5r-Jw-O9y" secondAttribute="bottom" constant="5" id="mRl-U1-PoH"/>
                 <constraint firstAttribute="bottom" secondItem="veI-Mt-kH2" secondAttribute="bottom" id="msB-7j-WXS"/>
-                <constraint firstItem="7cX-X1-Hdi" firstAttribute="top" secondItem="EAt-dW-M99" secondAttribute="bottom" constant="5" id="qwU-hp-z5f"/>
+                <constraint firstAttribute="trailing" secondItem="p5r-Jw-O9y" secondAttribute="trailing" id="tmn-mI-Itl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="165" height="219"/>
             <connections>
-                <outlet property="avatarImageView" destination="EAt-dW-M99" id="zsF-dU-4RE"/>
+                <outlet property="avatarButton" destination="p5r-Jw-O9y" id="TtJ-XI-GTD"/>
                 <outlet property="nameLabel" destination="7cX-X1-Hdi" id="gw6-ad-6gF"/>
                 <outlet property="roleLabel" destination="veI-Mt-kH2" id="TfN-IC-Z44"/>
             </connections>

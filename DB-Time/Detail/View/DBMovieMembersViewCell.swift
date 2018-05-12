@@ -7,23 +7,38 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class DBMovieMembersViewCell: UITableViewCell {
 
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var collectionView: UICollectionView!
-    private var castModels: [DBCastModel] = []
+    
+    private let disposeBag = DisposeBag()
+    var avatarClickClosure: (() -> Void)?
     
     func configWithCasts(_ casts: [DBCastModel]) {
-        castModels = casts
-        collectionView.reloadData()
+        
+        collectionView.delegate = nil
+        collectionView.dataSource = nil
+        
+        let items = Observable.just(casts)
+        
+        items.bind(to: collectionView.rx.items){ [weak self] (collectionView, row, cast) in
+            let indexPath = IndexPath(item: row, section: 0)
+            let cell = collectionView.dequeueReusableCell(with: DBMovieMemberCollectionViewCell.self, for: indexPath)
+            cell.avatarClickClosure = { [weak self] in
+                self?.avatarClickClosure?()
+            }
+            cell.configWithCast(cast)
+            return cell
+        }.disposed(by: disposeBag)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         collectionView.registerNib(DBMovieMemberCollectionViewCell.self)
     }
@@ -37,15 +52,3 @@ class DBMovieMembersViewCell: UITableViewCell {
     }
 }
 
-
-extension DBMovieMembersViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return castModels.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(with: DBMovieMemberCollectionViewCell.self, for: indexPath)
-        cell.configWithCast(castModels[indexPath.row])
-        return cell
-    }
-}

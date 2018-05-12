@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class DBMovieMemberCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var roleLabel: UILabel!
     
+    private var disposeBag = DisposeBag()
+    var avatarClickClosure: (() -> Void)?
+    
     func configWithCast(_ model: DBCastModel) {
         
-        avatarImageView.setImage(with: URL(string: model.avatars.small))
+        avatarButton.setImage(with: URL(string: model.avatars.small))
         nameLabel.text = model.name
         roleLabel.text = model.role
+        
+        avatarButton.rx.tap.subscribe(onNext: {
+            self.avatarClickClosure?()
+        }).disposed(by: disposeBag)
     }
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

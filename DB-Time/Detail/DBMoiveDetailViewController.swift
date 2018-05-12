@@ -30,6 +30,9 @@ class DBMoiveDetailViewController: DBBaseViewController {
                 model.role = "导演"
                 return model
             })
+            cell.avatarClickClosure = {
+                print("hello")
+            }
             cell.configWithCasts(directors + movie.casts)
             return cell
         default:
