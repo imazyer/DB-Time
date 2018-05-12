@@ -1,5 +1,5 @@
 //
-//  DBRatingModel.swift
+//  DBMovieModels.swift
 //  DB-Time
 //
 //  Created by Mazy on 2018/5/4.

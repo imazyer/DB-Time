@@ -13,7 +13,6 @@ import RxCocoa
 
 class DBLeftSideViewController: DBBaseViewController {
 
-    var disposeBag = DisposeBag()
     var tableView: UITableView!
     
     override func viewDidLoad() {

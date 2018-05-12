@@ -16,7 +16,7 @@ class DBMovieMembersViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let disposeBag = DisposeBag()
-    var avatarClickClosure: (() -> Void)?
+    var avatarClickClosure: ((UIButton, Int) -> Void)?
     
     func configWithCasts(_ casts: [DBCastModel]) {
         
@@ -28,8 +28,8 @@ class DBMovieMembersViewCell: UITableViewCell {
         items.bind(to: collectionView.rx.items){ [weak self] (collectionView, row, cast) in
             let indexPath = IndexPath(item: row, section: 0)
             let cell = collectionView.dequeueReusableCell(with: DBMovieMemberCollectionViewCell.self, for: indexPath)
-            cell.avatarClickClosure = { [weak self] in
-                self?.avatarClickClosure?()
+            cell.avatarClickClosure = { [weak self] button in
+                self?.avatarClickClosure?(button, row)
             }
             cell.configWithCast(cast)
             return cell

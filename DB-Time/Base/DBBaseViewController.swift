@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class DBBaseViewController: UIViewController {
-
+    /// ARC & Rx 垃圾回收
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -12,37 +12,9 @@ import RxCocoa
 import RxDataSources
 
 class DBMoiveDetailViewController: DBBaseViewController {
-    /// ARC & Rx 垃圾回收
-    private let disposeBag = DisposeBag()
+
     private var tableView: UITableView!
     private var headerView = UIView.loadFromNibAndClass(DBMovieDetailHeaderView.self)!
-    
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, DBMovieSubject>>(configureCell: {
-        (dataSource, tableView, indexPath, movie) in
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
-            cell.configWithMovie(movie)
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
-            let directors = movie.directors.map({ (model) -> DBCastModel in
-                model.role = "导演"
-                return model
-            })
-            cell.avatarClickClosure = {
-                print("hello")
-            }
-            cell.configWithCasts(directors + movie.casts)
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
-            cell.configWithText(movie.summary)
-            return cell
-        }
-    }, titleForHeaderInSection: { dataSource, sectionIndex in
-        return dataSource[sectionIndex].model
-    })
     
     var movieSubject: DBMovieSubject?
     
@@ -60,6 +32,41 @@ class DBMoiveDetailViewController: DBBaseViewController {
             SectionModel(model: "", items: [movie]),
             SectionModel(model: "剧情简介:", items: [movie])
             ])
+        
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, DBMovieSubject>>(configureCell: {
+            (dataSource, tableView, indexPath, movie) in
+            switch indexPath.section {
+            case 0:
+                let cell = tableView.dequeueReusableCell(with: DBMovieInfoViewCell.self)
+                cell.configWithMovie(movie)
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(with: DBMovieMembersViewCell.self)
+                let directors = movie.directors.map({ (model) -> DBCastModel in
+                    model.role = "导演"
+                    return model
+                })
+                cell.avatarClickClosure = { button, index in
+                    button.superview?.subviews.forEach({ $0.hero.id = nil })
+                    let castVC = DBCastViewController()
+                    castVC.hero.isEnabled = true
+                    self.navigationController?.hero.isEnabled = true
+                    self.navigationController?.hero.navigationAnimationType = .fade
+                    let model = (directors + movie.casts)[index]
+                    castVC.castModel = model
+                    button.hero.id = "avatar_id\(model.id)"
+                    self.navigationController?.pushViewController(castVC, animated: true)
+                }
+                cell.configWithCasts(directors + movie.casts)
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(with: DBMovieSummaryCell.self)
+                cell.configWithText(movie.summary)
+                return cell
+            }
+        }, titleForHeaderInSection: { dataSource, sectionIndex in
+            return dataSource[sectionIndex].model
+        })
         
         items.bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         
@@ -92,7 +99,7 @@ class DBMoiveDetailViewController: DBBaseViewController {
 extension DBMoiveDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 2 ? 34 : 0.001
+        return section == 2 ? 35 : 0.001
     }
 }
 

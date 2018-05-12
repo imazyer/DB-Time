@@ -14,8 +14,7 @@ import Moya
 import ObjectMapper
 
 class DBHomeViewController: DBBaseViewController {
-    /// ARC & Rx 垃圾回收
-    private let disposeBag = DisposeBag()
+    
     private var swipeableView: ZLSwipeableView!
     // 当前card在数组中的索引
     private var currentCardIndex: Int = 0

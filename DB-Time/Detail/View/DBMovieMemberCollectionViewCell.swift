@@ -17,7 +17,7 @@ class DBMovieMemberCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     
     private var disposeBag = DisposeBag()
-    var avatarClickClosure: (() -> Void)?
+    var avatarClickClosure: ((UIButton) -> Void)?
     
     func configWithCast(_ model: DBCastModel) {
         
@@ -26,7 +26,7 @@ class DBMovieMemberCollectionViewCell: UICollectionViewCell {
         roleLabel.text = model.role
         
         avatarButton.rx.tap.subscribe(onNext: {
-            self.avatarClickClosure?()
+            self.avatarClickClosure?(self.avatarButton)
         }).disposed(by: disposeBag)
     }
     

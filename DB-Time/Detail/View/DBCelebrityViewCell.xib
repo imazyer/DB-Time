@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DBCelebrityViewCell" rowHeight="191" id="KGk-i7-Jjw" customClass="DBCelebrityViewCell" customModule="DB_Time" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="191"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="190.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O1s-z3-yDu">
+                        <rect key="frame" x="16" y="11" width="126.5" height="169"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="O1s-z3-yDu" secondAttribute="height" multiplier="3:4" id="vvb-6V-cTV"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周冬雨" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idj-O3-Iln">
+                        <rect key="frame" x="158.5" y="42" width="55.5" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dongyu Zhou" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-Dh-cCU">
+                        <rect key="frame" x="158.5" y="66.5" width="65" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="Igk-cb-6mb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别: 女" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lc-3Z-VDx">
+                        <rect key="frame" x="158.5" y="88" width="44" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="v1e-dw-DfK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昵称: 冬叔(昵称) / 小黄鸭(昵称)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRQ-74-ChT">
+                        <rect key="frame" x="158.5" y="107.5" width="171" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Nqo-hU-iD5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出生地: 中国,河北,石家庄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofl-hf-1Li">
+                        <rect key="frame" x="158.5" y="146" width="137" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="6Ze-vv-89u"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职业: 演员 / 配音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcw-44-zFu">
+                        <rect key="frame" x="158.5" y="127" width="91.5" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Re9-iH-GjV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="idj-O3-Iln" firstAttribute="leading" secondItem="Ofl-hf-1Li" secondAttribute="leading" id="1EJ-u6-wTW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ofl-hf-1Li" secondAttribute="bottom" constant="20" id="1nn-J0-kIk"/>
+                    <constraint firstItem="O1s-z3-yDu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="40P-0K-iMX"/>
+                    <constraint firstItem="Gcw-44-zFu" firstAttribute="leading" secondItem="Ofl-hf-1Li" secondAttribute="leading" id="72c-d4-Wb7"/>
+                    <constraint firstItem="XRQ-74-ChT" firstAttribute="top" secondItem="9lc-3Z-VDx" secondAttribute="bottom" constant="5" id="DLQ-Bo-mfj"/>
+                    <constraint firstItem="9lc-3Z-VDx" firstAttribute="leading" secondItem="Ofl-hf-1Li" secondAttribute="leading" id="DaY-au-1QJ"/>
+                    <constraint firstItem="Ofl-hf-1Li" firstAttribute="leading" secondItem="O1s-z3-yDu" secondAttribute="trailing" constant="16" id="Esk-QP-CJv"/>
+                    <constraint firstItem="XRQ-74-ChT" firstAttribute="leading" secondItem="Ofl-hf-1Li" secondAttribute="leading" id="RDh-SL-20p"/>
+                    <constraint firstItem="9lc-3Z-VDx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Trq-NE-EIm"/>
+                    <constraint firstItem="9lc-3Z-VDx" firstAttribute="top" secondItem="Xp5-Dh-cCU" secondAttribute="bottom" constant="10" id="WGa-qL-El6"/>
+                    <constraint firstItem="O1s-z3-yDu" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="e5j-Np-ONo"/>
+                    <constraint firstItem="O1s-z3-yDu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ox0-Ab-TRa"/>
+                    <constraint firstItem="Xp5-Dh-cCU" firstAttribute="leading" secondItem="Ofl-hf-1Li" secondAttribute="leading" id="psK-Mp-Bu4"/>
+                    <constraint firstItem="Xp5-Dh-cCU" firstAttribute="top" secondItem="idj-O3-Iln" secondAttribute="bottom" constant="3" id="rFq-3K-qFo"/>
+                    <constraint firstItem="Ofl-hf-1Li" firstAttribute="top" secondItem="Gcw-44-zFu" secondAttribute="bottom" constant="5" id="u61-Xk-Ybr"/>
+                    <constraint firstItem="Gcw-44-zFu" firstAttribute="top" secondItem="XRQ-74-ChT" secondAttribute="bottom" constant="5" id="uer-Cu-8OX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="avatarImageView" destination="O1s-z3-yDu" id="tSG-f4-Ogx"/>
+                <outlet property="bornPlaceLabel" destination="Ofl-hf-1Li" id="iwZ-2O-k25"/>
+                <outlet property="genderLabel" destination="9lc-3Z-VDx" id="tno-3y-efo"/>
+                <outlet property="nameEnLabel" destination="Xp5-Dh-cCU" id="Lhi-2M-9dG"/>
+                <outlet property="nameLabel" destination="idj-O3-Iln" id="FIb-wt-UpE"/>
+                <outlet property="nicknameLabel" destination="XRQ-74-ChT" id="xCM-pe-eMX"/>
+                <outlet property="roleLabel" destination="Gcw-44-zFu" id="h3l-mn-zAv"/>
+            </connections>
+            <point key="canvasLocation" x="59" y="127.5"/>
+        </tableViewCell>
+    </objects>
+</document>

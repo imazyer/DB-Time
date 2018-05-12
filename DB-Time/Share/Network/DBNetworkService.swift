@@ -22,6 +22,7 @@ public enum DBNetworkAPI {
     case newMovies  // 新片榜
     
     case movieDetail(String) // 影片详情
+    case celebrityDetail(String)   // 影人条目信息
 }
 
 //请求配置
@@ -46,6 +47,8 @@ extension DBNetworkAPI: TargetType {
             return "/v2/movie/new_movies"
         case .movieDetail(let id):
             return "/v2/movie/subject/" + id
+        case .celebrityDetail(let id):
+            return "/v2/movie/celebrity/" + id
         }
     }
     
