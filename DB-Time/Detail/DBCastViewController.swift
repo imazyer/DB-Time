@@ -75,6 +75,7 @@ class DBCastViewController: DBBaseViewController {
             }
             let movieDetailVC = DBMovieDetailViewController()
             movieDetailVC.movieSubject = movie
+            movieDetailVC.getMovieDetail(movie.id)
             self.navigationController?.show(movieDetailVC, sender: nil)
         }).disposed(by: disposeBag)
         

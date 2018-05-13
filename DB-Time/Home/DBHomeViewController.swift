@@ -59,9 +59,7 @@ class DBHomeViewController: DBBaseViewController {
         
         swipeableView.didTap = {view, location in
             guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
-            if let movieID = cardView.cardMovie?.id {
-                self.getMovieDetail(movieID)
-            }
+            guard let movie = cardView.cardMovie else { return }
             UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                 cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
             }, completion: { (_) in
@@ -70,27 +68,23 @@ class DBHomeViewController: DBBaseViewController {
                 } else {
                     self.detailVC.view.frame = cardView.bounds
                     cardView.addSubview(self.detailVC.view)
+                    if self.detailVC.movieSubject?.id != movie.id {
+                        self.detailVC.movieSubject = movie
+                        self.detailVC.getMovieDetail(movie.id)
+                    }
                 }
                 UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
                     cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
                 })
             })
         }
-    }
-    
-    func getMovieDetail(_ id: String) {
-        if self.detailVC.movieSubject?.id == id {
-            return
+        
+        swipeableView.didSwipe = { view, direction, vector in
+            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+            if cardView.subviews.contains(self.detailVC.view) {
+                self.detailVC.view?.removeFromSuperview()
+            }
         }
-        DBNetworkProvider.rx.request(.movieDetail(id))
-            .mapObject(DBMovieSubject.self)
-            .subscribe(onSuccess: { [weak self] movie in
-                // 数据处理
-                self?.detailVC.bindData(movie)
-                self?.detailVC.view.layoutIfNeeded()
-                }, onError: { error in
-                    print("数据请求失败! 错误原因: ", error)
-            }).disposed(by: disposeBag)
     }
     
     func requestData(_ index: Int = 0) {

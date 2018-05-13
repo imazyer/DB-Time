@@ -15,19 +15,21 @@ class DBMovieDetailViewController: DBBaseViewController {
 
     private var tableView: UITableView!
     private var headerView = UIView.loadFromNibAndClass(DBMovieDetailHeaderView.self)!
+    private var isDetailShow: Bool = false
     
-    var movieSubject: DBMovieSubject?
+    var movieSubject: DBMovieSubject? {
+        didSet {
+            if let avatar = movieSubject?.images {
+                headerView.setupWithImage(avatar)
+            }
+        }
+    }
     
     func bindData(_ movie: DBMovieSubject?) {
         guard let movie = movie else { return }
         
         tableView.delegate = nil
         tableView.dataSource = nil
-        
-//        movieSubject = movie
-        if let image = movie.images {
-            headerView.setupWithImage(image)
-        }
         
         let items = Observable.just([
             SectionModel(model: "", items: [movie]),
@@ -49,6 +51,13 @@ class DBMovieDetailViewController: DBBaseViewController {
                     return model
                 })
                 cell.avatarClickClosure = { button, index in
+                    
+                    if self.isDetailShow {
+                        return
+                    }
+                    self.isDetailShow = true
+                    print("-------88888888-----\(index)--")
+                    
                     button.superview?.subviews.forEach({ $0.hero.id = nil })
                     let castVC = DBCastViewController()
                     // hero
@@ -98,9 +107,26 @@ class DBMovieDetailViewController: DBBaseViewController {
         
         tableView.tableHeaderView = headerView
         
-        if movieSubject != nil {
-            bindData(movieSubject!)
+        navigationItem.title = movieSubject?.title
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.isDetailShow = false
+    }
+    
+    func getMovieDetail(_ id: String?) {
+        guard let id = id else {
+            return
         }
+        DBNetworkProvider.rx.request(.movieDetail(id))
+            .mapObject(DBMovieSubject.self)
+            .subscribe(onSuccess: { [weak self] movie in
+                // 数据处理
+                self?.bindData(movie)
+                }, onError: { error in
+                    print("数据请求失败! 错误原因: ", error)
+            }).disposed(by: disposeBag)
     }
 }
 
