@@ -21,7 +21,9 @@ class DBWorkTableViewCell: UITableViewCell {
     @IBOutlet weak var rolesLabel: UILabel!
     
     func configWithWork(_ model: DBWorkModel) {
-        postImageView.setImage(with: URL(string: model.movie.images.small))
+        if let post = model.movie.images?.small {
+            postImageView.setImage(with: URL(string: post))
+        }
         nameLabel.text = model.movie.title
         starView.rating = model.movie.rating.average / 2
         ratingLabel.text = "\(model.movie.rating.average)"

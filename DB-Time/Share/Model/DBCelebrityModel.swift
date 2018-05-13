@@ -15,7 +15,7 @@ struct DBCelebrityModel: Mappable {
     var name: String = ""
     var works: [DBWorkModel] = []
     var gender: String = ""
-    var avatars: DBAvatar!
+    var avatars: DBAvatar?
     var id: String = ""
     var aka: [String] = []
     var nameEN: String = ""

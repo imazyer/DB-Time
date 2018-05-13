@@ -1,14 +1,14 @@
 //
-//  DBCelebrityViewCell.swift
+//  DBCelebrityHeaderView.swift
 //  DB-Time
 //
-//  Created by Mazy on 2018/5/12.
+//  Created by Mazy on 2018/5/13.
 //  Copyright © 2018年 Mazy. All rights reserved.
 //
 
 import UIKit
 
-class DBCelebrityViewCell: UITableViewCell {
+class DBCelebrityHeaderView: UIView {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,9 +18,17 @@ class DBCelebrityViewCell: UITableViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var bornPlaceLabel: UILabel!
     
-    func configWithCelebrity(_ model: DBCelebrityModel) {
-        avatarImageView.setImage(with: URL(string: model.avatars.small))
+    func configWithCast(_ model: DBCastModel) {
+        avatarImageView.hero.id = "avatar_id\(model.id)"
+        if let avatar = model.avatars?.small {
+            avatarImageView.setImage(with: URL(string: avatar))
+        }
         nameLabel.text = model.name
+        roleLabel.text = "职业: " + model.role
+    }
+    
+    func configWithCelebrity(_ model: DBCelebrityModel) {
+        
         nameEnLabel.text = model.nameEN
         genderLabel.text = "性别: " + model.gender
         var askString = "昵称: "
@@ -52,16 +60,4 @@ class DBCelebrityViewCell: UITableViewCell {
         roleLabel.text = rolesString
         bornPlaceLabel.text = "出生地: " + model.bornPlace
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

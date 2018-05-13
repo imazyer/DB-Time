@@ -20,8 +20,9 @@ class DBMovieMemberCollectionViewCell: UICollectionViewCell {
     var avatarClickClosure: ((UIButton) -> Void)?
     
     func configWithCast(_ model: DBCastModel) {
-        
-        avatarButton.setImage(with: URL(string: model.avatars.small))
+        if let avatar = model.avatars?.small {
+            avatarButton.setImage(with: URL(string: avatar))
+        }
         nameLabel.text = model.name
         roleLabel.text = model.role
         

@@ -24,8 +24,10 @@ class DBMovieDetailViewController: DBBaseViewController {
         tableView.delegate = nil
         tableView.dataSource = nil
         
-        movieSubject = movie
-        headerView.setupWithImage(movie.images)
+//        movieSubject = movie
+        if let image = movie.images {
+            headerView.setupWithImage(image)
+        }
         
         let items = Observable.just([
             SectionModel(model: "", items: [movie]),
@@ -95,6 +97,10 @@ class DBMovieDetailViewController: DBBaseViewController {
         })
         
         tableView.tableHeaderView = headerView
+        
+        if movieSubject != nil {
+            bindData(movieSubject!)
+        }
     }
 }
 

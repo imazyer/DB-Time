@@ -12,8 +12,6 @@
 		6422742120A69F590030574E /* DBCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422742020A69F590030574E /* DBCastViewController.swift */; };
 		6422742320A6A21E0030574E /* DBWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422742220A6A21E0030574E /* DBWebViewController.swift */; };
 		6422742520A6B2610030574E /* DBCelebrityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422742420A6B2610030574E /* DBCelebrityModel.swift */; };
-		6422742820A6BBF70030574E /* DBCelebrityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422742620A6BBF70030574E /* DBCelebrityViewCell.swift */; };
-		6422742920A6BBF70030574E /* DBCelebrityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6422742720A6BBF70030574E /* DBCelebrityViewCell.xib */; };
 		6422742C20A6BF7E0030574E /* DBWorkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422742A20A6BF7E0030574E /* DBWorkTableViewCell.swift */; };
 		6422742D20A6BF7E0030574E /* DBWorkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6422742B20A6BF7E0030574E /* DBWorkTableViewCell.xib */; };
 		6453E341209AE6CE00220CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453E340209AE6CE00220CFE /* AppDelegate.swift */; };
@@ -80,6 +78,8 @@
 		64CC438F209D63D90070902C /* DBMovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC438E209D63D90070902C /* DBMovieDetailViewController.swift */; };
 		64CCC53120A44D6D00536357 /* DBMovieInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CCC52F20A44D6D00536357 /* DBMovieInfoViewCell.swift */; };
 		64CCC53220A44D6D00536357 /* DBMovieInfoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64CCC53020A44D6D00536357 /* DBMovieInfoViewCell.xib */; };
+		64DCBAA720A7C968008680FA /* DBCelebrityHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DCBAA620A7C968008680FA /* DBCelebrityHeaderView.swift */; };
+		64DCBAA920A7C978008680FA /* DBCelebrityHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64DCBAA820A7C978008680FA /* DBCelebrityHeaderView.xib */; };
 		64F997A920A5EBD20074FA8E /* DBMovieSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F997A820A5EBD20074FA8E /* DBMovieSummaryCell.swift */; };
 		9D3A02BB9C6E0C35DA7D6B0B /* Pods_DB_TimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86B6490C80FF85A92880B0A /* Pods_DB_TimeUITests.framework */; };
 /* End PBXBuildFile section */
@@ -109,8 +109,6 @@
 		6422742020A69F590030574E /* DBCastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCastViewController.swift; sourceTree = "<group>"; };
 		6422742220A6A21E0030574E /* DBWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBWebViewController.swift; sourceTree = "<group>"; };
 		6422742420A6B2610030574E /* DBCelebrityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCelebrityModel.swift; sourceTree = "<group>"; };
-		6422742620A6BBF70030574E /* DBCelebrityViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCelebrityViewCell.swift; sourceTree = "<group>"; };
-		6422742720A6BBF70030574E /* DBCelebrityViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBCelebrityViewCell.xib; sourceTree = "<group>"; };
 		6422742A20A6BF7E0030574E /* DBWorkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBWorkTableViewCell.swift; sourceTree = "<group>"; };
 		6422742B20A6BF7E0030574E /* DBWorkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBWorkTableViewCell.xib; sourceTree = "<group>"; };
 		6453E33D209AE6CE00220CFE /* DB-Time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DB-Time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +182,8 @@
 		64CC438E209D63D90070902C /* DBMovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieDetailViewController.swift; sourceTree = "<group>"; };
 		64CCC52F20A44D6D00536357 /* DBMovieInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieInfoViewCell.swift; sourceTree = "<group>"; };
 		64CCC53020A44D6D00536357 /* DBMovieInfoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBMovieInfoViewCell.xib; sourceTree = "<group>"; };
+		64DCBAA620A7C968008680FA /* DBCelebrityHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCelebrityHeaderView.swift; sourceTree = "<group>"; };
+		64DCBAA820A7C978008680FA /* DBCelebrityHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DBCelebrityHeaderView.xib; sourceTree = "<group>"; };
 		64F997A820A5EBD20074FA8E /* DBMovieSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieSummaryCell.swift; sourceTree = "<group>"; };
 		79D78DCECE688F0AB08CA19C /* Pods-DB-TimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DB-TimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DB-TimeTests/Pods-DB-TimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		83870E5941948CF605C994E3 /* Pods-DB-Time.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DB-Time.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DB-Time/Pods-DB-Time.debug.xcconfig"; sourceTree = "<group>"; };
@@ -466,10 +466,10 @@
 				64CCC52F20A44D6D00536357 /* DBMovieInfoViewCell.swift */,
 				64CCC53020A44D6D00536357 /* DBMovieInfoViewCell.xib */,
 				64F997A820A5EBD20074FA8E /* DBMovieSummaryCell.swift */,
-				6422742620A6BBF70030574E /* DBCelebrityViewCell.swift */,
-				6422742720A6BBF70030574E /* DBCelebrityViewCell.xib */,
 				6422742A20A6BF7E0030574E /* DBWorkTableViewCell.swift */,
 				6422742B20A6BF7E0030574E /* DBWorkTableViewCell.xib */,
+				64DCBAA620A7C968008680FA /* DBCelebrityHeaderView.swift */,
+				64DCBAA820A7C978008680FA /* DBCelebrityHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -625,6 +625,7 @@
 			files = (
 				6453E396209AF73A00220CFE /* Info.plist in Resources */,
 				6453E34B209AE6CF00220CFE /* LaunchScreen.storyboard in Resources */,
+				64DCBAA920A7C978008680FA /* DBCelebrityHeaderView.xib in Resources */,
 				6453E348209AE6CF00220CFE /* Assets.xcassets in Resources */,
 				6492079B20A419A20016F52B /* DBMovieDetailHeaderView.xib in Resources */,
 				6422742D20A6BF7E0030574E /* DBWorkTableViewCell.xib in Resources */,
@@ -633,7 +634,6 @@
 				64C36D23209DCB5D002D4EA3 /* DBMovieHeaderView.xib in Resources */,
 				6453E3A7209BF68300220CFE /* DBLeftTableViewCell.xib in Resources */,
 				6453E3AD209BF9EE00220CFE /* DBLeftHeaderView.xib in Resources */,
-				6422742920A6BBF70030574E /* DBCelebrityViewCell.xib in Resources */,
 				6453E3B5209C070800220CFE /* DBUserInfoViewController.xib in Resources */,
 				6453E346209AE6CE00220CFE /* Main.storyboard in Resources */,
 				6470CA89209C5563008A1938 /* DBMovieCardView.xib in Resources */,
@@ -799,9 +799,9 @@
 				6470CA80209C4B7C008A1938 /* Single+Response.swift in Sources */,
 				64F997A920A5EBD20074FA8E /* DBMovieSummaryCell.swift in Sources */,
 				649207A220A428680016F52B /* DBMovieMemberCollectionViewCell.swift in Sources */,
+				64DCBAA720A7C968008680FA /* DBCelebrityHeaderView.swift in Sources */,
 				64CCC53120A44D6D00536357 /* DBMovieInfoViewCell.swift in Sources */,
 				6453E393209AF73A00220CFE /* ViewManager.swift in Sources */,
-				6422742820A6BBF70030574E /* DBCelebrityViewCell.swift in Sources */,
 				6453E378209AED5300220CFE /* DBNavigationController.swift in Sources */,
 				6453E341209AE6CE00220CFE /* AppDelegate.swift in Sources */,
 				6470CA8B209C5657008A1938 /* DBMovieCardContainer.swift in Sources */,

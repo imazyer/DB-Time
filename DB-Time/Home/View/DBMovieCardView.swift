@@ -32,7 +32,10 @@ class DBMovieCardView: UIView {
     
     func setupWithUser(movie: DBMovieSubject) {
         cardMovie = movie
-        coverImageView.setImage(with: URL(string: movie.images.medium))
+        
+        if let coverImg = movie.images?.medium {
+            coverImageView.setImage(with: URL(string: coverImg))
+        }
         nameLabel.text = movie.title + " / " + movie.originalTitle
         directorsLabel.text = "导演: " + movie.directors.map({ $0.name + " " }).reduce("", +)
         actorsLabel.text = "主演: " + movie.casts.map({ $0.name + " " }).reduce("", +)
