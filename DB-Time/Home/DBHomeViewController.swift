@@ -15,13 +15,19 @@ import ObjectMapper
 
 class DBHomeViewController: DBBaseViewController {
     
-    private var swipeableView: ZLSwipeableView!
+    @IBOutlet weak var swipeableView: ZLSwipeableView!
+    @IBOutlet weak var passButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var superLikeButton: UIButton!
+    
+//    private var swipeableView: ZLSwipeableView!
     // 当前card在数组中的索引
     private var currentCardIndex: Int = 0
     private var dataSource: [DBMovieSubject] = []
     private var detailVC = DBMovieDetailViewController()
     private var isShowing: Bool = false
-    let popListView = DBPopupMovieTypeView()
+    
+    private var popListView = DBPopupMovieTypeView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +44,15 @@ class DBHomeViewController: DBBaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarItemButton)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightMoreButtonDidTap))
-        
-        swipeableView = ZLSwipeableView()
-        view.addSubview(swipeableView)
-        swipeableView.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(20)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-100)
-        })
+        //
+        passButton.clipCorners(corners: [.topRight, .bottomRight], radius: 20)
+        likeButton.clipCorners(corners: [.topLeft, .bottomLeft], radius: 20)
+        superLikeButton.clipCorners(corners: [.topLeft, .topRight], radius: 20)
         
         swipeableView.allowedDirection = [.horizontal, .up]
         swipeableView.numberOfActiveView = 3
         swipeableView.onlySwipeTopCard = true
-
+        
         self.addChildViewController(detailVC)
         
 //        setupSwipeableViewDelegate()

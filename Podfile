@@ -13,6 +13,7 @@ pod 'Hero'
 pod 'SnapKit'
 pod 'Kingfisher'
 pod 'Cosmos'
+pod 'R.swift'
     
   target 'DB-TimeTests' do
     inherit! :search_paths

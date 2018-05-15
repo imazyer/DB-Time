@@ -18,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
-        let homeVC = DBNavigationController(rootViewController: DBHomeViewController())
+        let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! DBHomeViewController
+        let homeNavi = DBNavigationController(rootViewController: homeVC)
         let leftVC = DBLeftSideViewController()
         let rightVC = DBRightSideViewController()
-        let menuContainer = FWSideMenuContainerViewController.container(centerViewController: homeVC, leftMenuViewController: leftVC, rightMenuViewController: rightVC)
+        let menuContainer = FWSideMenuContainerViewController.container(centerViewController: homeNavi, leftMenuViewController: leftVC, rightMenuViewController: rightVC)
         window?.rootViewController = menuContainer
         window?.makeKeyAndVisible()
         
