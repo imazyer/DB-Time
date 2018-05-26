@@ -26,6 +26,7 @@ class DBHomeViewController: DBBaseViewController {
     private var dataSource: [DBMovieSubject] = []
     private var detailVC = DBMovieDetailViewController()
     private var isShowing: Bool = false
+    private var translation: CGPoint = .zero
     
     private var popListView = DBPopupMovieTypeView()
     
@@ -55,37 +56,37 @@ class DBHomeViewController: DBBaseViewController {
         
         self.addChildViewController(detailVC)
         
-//        setupSwipeableViewDelegate()
+        setupSwipeableViewDelegate()
         requestData()
         
-        swipeableView.didTap = {view, location in
-            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
-            guard let movie = cardView.cardMovie else { return }
-            UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
-                cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
-            }, completion: { (_) in
-                if cardView.subviews.contains(self.detailVC.view) {
-                    self.detailVC.view?.removeFromSuperview()
-                } else {
-                    self.detailVC.view.frame = cardView.bounds
-                    cardView.addSubview(self.detailVC.view)
-                    if self.detailVC.movieSubject?.id != movie.id {
-                        self.detailVC.movieSubject = movie
-                        self.detailVC.getMovieDetail(movie.id)
-                    }
-                }
-                UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
-                    cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
-                })
-            })
-        }
-        
-        swipeableView.didSwipe = { view, direction, vector in
-            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
-            if cardView.subviews.contains(self.detailVC.view) {
-                self.detailVC.view?.removeFromSuperview()
-            }
-        }
+//        swipeableView.didTap = {view, location in
+//            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+//            guard let movie = cardView.cardMovie else { return }
+//            UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
+//                cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
+//            }, completion: { (_) in
+//                if cardView.subviews.contains(self.detailVC.view) {
+//                    self.detailVC.view?.removeFromSuperview()
+//                } else {
+//                    self.detailVC.view.frame = cardView.bounds
+//                    cardView.addSubview(self.detailVC.view)
+//                    if self.detailVC.movieSubject?.id != movie.id {
+//                        self.detailVC.movieSubject = movie
+//                        self.detailVC.getMovieDetail(movie.id)
+//                    }
+//                }
+//                UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
+//                    cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
+//                })
+//            })
+//        }
+//
+//        swipeableView.didSwipe = { view, direction, vector in
+//            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+//            if cardView.subviews.contains(self.detailVC.view) {
+//                self.detailVC.view?.removeFromSuperview()
+//            }
+//        }
     }
     
     func requestData(_ index: Int = 0) {
@@ -191,33 +192,33 @@ class DBHomeViewController: DBBaseViewController {
 
 
 // MARK: - SwipeableViewDelegate
-/*
 extension DBHomeViewController {
     func setupSwipeableViewDelegate()  {
         
         /// Swiping at view location
         swipeableView.swiping = { view, location, translation in
-            let cellView = view as! HHDatingCardContainer
+                guard let containerView = view as? DBMovieCardContainer, let cellView = containerView.card else { return }
             let limit: CGFloat = 30.0
             if (translation.y < -limit * CGFloat(3)) {
                 if (translation.x < -limit * CGFloat(2)) {
                     let alpha = min(1.0, (abs(translation.x) - limit * CGFloat(2)) / limit)
-                    cellView.swipeToLeft(withAlpha: alpha)
+//                    cellView.swipeToLeft(withAlpha: alpha)
+                    self.passButton.transform = CGAffineTransform(scaleX: 1 + alpha, y: 1)
                 } else if (translation.x > limit * CGFloat(2)) {
                     let alpha = min(1.0, (abs(translation.x) - limit * CGFloat(2)) / limit)
-                    cellView.swipeToRight(withAlpha: alpha)
+//                    cellView.swipeToRight(withAlpha: alpha)
                 } else {
                     let alpha = min(1.0, (abs(translation.y) - limit * CGFloat(3)) / limit)
-                    cellView.swipeToUp(withAlpha: alpha)
+//                    cellView.swipeToUp(withAlpha: alpha)
                 }
             } else {
-                cellView.swipeToUp(withAlpha: 0.0)
+//                cellView.swipeToUp(withAlpha: 0.0)
                 if (translation.x < -limit) {
                     let alpha = min(1.0, (abs(translation.x) - limit) / limit)
-                    cellView.swipeToLeft(withAlpha: alpha)
+//                    cellView.swipeToLeft(withAlpha: alpha)
                 } else if (translation.x > limit) {
                     let alpha = min(1.0, (abs(translation.x) - limit) / limit)
-                    cellView.swipeToRight(withAlpha: alpha)
+//                    cellView.swipeToRight(withAlpha: alpha)
                 }
             }
             
@@ -232,108 +233,46 @@ extension DBHomeViewController {
                 let scaleX = 1.0 + min(abs(translation.x), 100) * 0.002;
                 UIView.animate(withDuration: 0.25, animations: {
                     if translation.x > 0 {
-                        self.likeButton.transform = CGAffineTransform(scaleX: scaleX, y: scaleX)
+                        self.likeButton.frame.size.width *= scaleX
                     } else {
-                        self.passButton.transform = CGAffineTransform(scaleX: scaleX, y: scaleX)
+                        self.passButton.transform = CGAffineTransform(scaleX: scaleX, y: 1)
                     }
                     self.superLikeButton.transform = .identity
                 })
             }
-            self.translation = translation
+//            self.translation = translation
         }
         
         /// Did end swiping view at location:
-        swipeableView.didEnd = {view, location in
-            if (!self.didSwipe) {
-                if (self.translation.x <= -(UIScreen.main.bounds.width * 0.4)) {
-                    self.swipeableView.swipeTopView(inDirection: .left)
-                }
-                
-                if (self.translation.x >= (UIScreen.main.bounds.width * 0.4)) {
-                    self.swipeableView.swipeTopView(inDirection: .right)
-                }
-                
-                let limit: CGFloat = 30.0
-                if (self.translation.y < -limit * CGFloat(3) && (self.translation.x >= -limit * CGFloat(2)) && self.translation.x <= limit * CGFloat(2)) {
-                    self.swipeableView.swipeTopView(inDirection: .up)
-                }
-            }
-            
-            self.didSwipe = false
-        }
+//        swipeableView.didEnd = {view, location in
+//            if (!self.didSwipe) {
+//                if (self.translation.x <= -(UIScreen.main.bounds.width * 0.4)) {
+//                    self.swipeableView.swipeTopView(inDirection: .left)
+//                }
+//
+//                if (self.translation.x >= (UIScreen.main.bounds.width * 0.4)) {
+//                    self.swipeableView.swipeTopView(inDirection: .right)
+//                }
+//
+//                let limit: CGFloat = 30.0
+//                if (self.translation.y < -limit * CGFloat(3) && (self.translation.x >= -limit * CGFloat(2)) && self.translation.x <= limit * CGFloat(2)) {
+//                    self.swipeableView.swipeTopView(inDirection: .up)
+//                }
+//            }
+//        }
         // Did swipe view in direction:  vector:
-        swipeableView.didSwipe = {view, direction, vector in
-            
-            let cellView = view as! HHDatingCardContainer
-            
-            guard let user = cellView.card?.user else {
-                self.rollback()
-                return
-            }
-            self.didSwipe = true
-            
-            switch direction {
-            case .left:
-                self.passWithUserID(user.id)
-            case .right:
-                self.likeWithUserID(user)
-            case .up:
-                if !self.isSuperLike {
-                    self.rollback()
-                    let coverView: HHSuperLikeCoverView = HHSuperLikeCoverView.coverView()
-                    coverView.updateUI(user: user, iconImage: cellView.card?.pictureImageView.image)
-                    coverView.outOfBalance = { [weak self] in
-                        let pGoldVC = R.storyboard.mine.hhPurchaseGoldViewController()!
-                        self?.navigationController?.pushViewController(pGoldVC, animated: true)
-                    }
-                    coverView.sendBarSuccess = { [weak self] model, count, outOfChance in
-                        cellView.card?.updateUIWithSuperLike()
-                        self?.startSuperLikeStarAnimation()
-                        executeAfterDelay(1, closure: {
-                            self?.isSuperLike = true
-                            self?.swipeableView.swipeTopView(inDirection: .up)
-                            if model?.isMatched == true {
-                                let matchedView = HHMatchSuccessView.matchView()
-                                matchedView.showWithUser(user)
-                                matchedView.beginChatClosure = {
-                                    self?.startConversation(with: user)
-                                }
-                                return
-                            }
-                            if outOfChance {
-                                executeAfterDelay(1, closure: {
-                                    self?.showOutOfChancesView()
-                                })
-                            }
-                        })
-                    }
-                    coverView.coverViewDismissed = {
-                        cellView.swipeToUp(withAlpha: 0)
-                    }
-                    coverView.show()
-                }
-                self.isSuperLike = false
-            default:
-                break
-            }
-            
-            UIView.animate(withDuration: 0.25, animations: {
-                self.superLikeButton.transform = .identity
-                self.likeButton.transform = .identity
-                self.passButton.transform = .identity
-            })
-            
-            self.currentIndex = 0
-            if self.swipeableView.activeViews().count <= 0 {
-                log.debug("重新请求数据")
-                self.checkAndGetLocation()
+        swipeableView.didSwipe = { view, direction, vector in
+            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+            if cardView.subviews.contains(self.detailVC.view) {
+                self.detailVC.view?.removeFromSuperview()
             }
         }
+        
         /// Did cancel swiping view
         swipeableView.didCancel = {view in
             //print("Did cancel swiping view")
-            let cellView = view as! HHDatingCardContainer
-            cellView.reset()
+            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+//            cardView.reset()
             
             UIView.animate(withDuration: 0.25, animations: {
                 self.superLikeButton.transform  = .identity
@@ -344,75 +283,34 @@ extension DBHomeViewController {
         
         /// Did tap at location
         swipeableView.didTap = {view, location in
-            
-            let cellView = view as! HHDatingCardContainer
-            guard let userModel = cellView.card?.user else {
-                return
-            }
-            
-            let infoVC = R.storyboard.home.hhUserInfoViewController()!
-            infoVC.profileModel = userModel
-            let navi = HHBaseNavigationController(rootViewController: infoVC)
-            navi.hero.isEnabled = true
-            infoVC.prevType = .other
-            infoVC.backClosure = { index in
-                if self.currentIndex == index { return }
-                self.currentIndex = index
-                if let cardContainer = self.swipeableView.topView() as? HHDatingCardContainer, let topView = cardContainer.card {
-                    let medias = userModel.profileMedias
-                    if index < medias.count {
-                        topView.updateMediaImageView(media: medias[index])
+            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+            guard let movie = cardView.cardMovie else { return }
+            UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
+                cardView.layer.transform = CATransform3DMakeRotation(-CGFloat(Double.pi/2), 0, 1, 0)
+            }, completion: { (_) in
+                if cardView.subviews.contains(self.detailVC.view) {
+                    self.detailVC.view?.removeFromSuperview()
+                } else {
+                    self.detailVC.view.frame = cardView.bounds
+                    cardView.addSubview(self.detailVC.view)
+                    if self.detailVC.movieSubject?.id != movie.id {
+                        self.detailVC.movieSubject = movie
+                        self.detailVC.getMovieDetail(movie.id)
                     }
                 }
-            }
-            
-            infoVC.reloadActiveViewsClosure = {
-                self.reloadActiveViewsData()
-            }
-            
-            infoVC.backClosureWithAction = { [weak self] matchModel, direction, outOfChance in
-                switch direction {
-                case .left:
-                    self?.bottomButtonClickAction((self?.passButton)!)
-                case .right:
-                    self?.bottomButtonClickAction((self?.likeButton)!)
-                case .up:
-                    cellView.card?.updateUIWithSuperLike()
-                    self?.startSuperLikeStarAnimation()
-                    if matchModel?.isMatched == true {
-                        let matchedView = HHMatchSuccessView.matchView()
-                        matchedView.showWithUser(userModel)
-                        matchedView.beginChatClosure = {
-                            self?.startConversation(with: userModel)
-                        }
-                        return
-                    }
-                    executeAfterDelay(1, closure: {
-                        self?.isSuperLike = true
-                        self?.swipeableView.swipeTopView(inDirection: .up)
-                        
-                        if outOfChance {
-                            executeAfterDelay(1, closure: {
-                                self?.showOutOfChancesView()
-                            })
-                        }
-                    })
-                default:
-                    break
-                }
-            }
-            infoVC.currentIndex = self.currentIndex
-            self.present(navi, animated: true, completion: nil)
+                UIView.animate(withDuration: 0.5, delay: 0, options: .transitionFlipFromLeft, animations: {
+                    cardView.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
+                })
+            })
         }
     }
     
     // 回滚
     func rollback() {
         self.swipeableView.rewind()
-        let cellView = (self.swipeableView.topView() as! HHDatingCardContainer).card
-        cellView?.swipeToLeft(withAlpha: 0)
-        cellView?.swipeToRight(withAlpha: 0)
-        cellView?.swipeToUp(withAlpha: 1)
+//        let cellView = (self.swipeableView.topView() as! HHDatingCardContainer).card
+//        cellView?.swipeToLeft(withAlpha: 0)
+//        cellView?.swipeToRight(withAlpha: 0)
+//        cellView?.swipeToUp(withAlpha: 1)
     }
 }
- */

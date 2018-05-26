@@ -11,5 +11,4 @@ import UIKit
 class DBMovieCardContainer: UIView {
 
     var card: DBMovieCardView?
-
 }
