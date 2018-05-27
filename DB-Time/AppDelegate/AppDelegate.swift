@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homeVC = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! DBHomeViewController
         let homeNavi = DBNavigationController(rootViewController: homeVC)
         let leftVC = DBLeftSideViewController()
-        let rightVC = DBRightSideViewController()
-        let menuContainer = FWSideMenuContainerViewController.container(centerViewController: homeNavi, leftMenuViewController: leftVC, rightMenuViewController: rightVC)
+//        let rightVC = DBRightSideViewController()
+        let menuContainer = FWSideMenuContainerViewController.container(centerViewController: homeNavi, leftMenuViewController: leftVC, rightMenuViewController: nil)
         window?.rootViewController = menuContainer
         window?.makeKeyAndVisible()
         

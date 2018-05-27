@@ -37,6 +37,8 @@ class DBPopupMovieTypeView: UIView, TableViewAnimationProtocol {
         tableView.rowHeight = 40
         tableView.isScrollEnabled = false
         tableView.isUserInteractionEnabled = true
+        tableView.layer.cornerRadius = 10
+        tableView.separatorInset = UIEdgeInsetsMake(0, 16, 0, 16)
         addSubview(tableView)
         
         tableView.snp.makeConstraints({
