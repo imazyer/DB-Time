@@ -13,7 +13,7 @@ import RxSwift
 import Moya
 import ObjectMapper
 
-class DBHomeViewController: DBBaseViewController {
+class DBHomeViewController: DBBaseViewController, DBHomeLoadViewProtocol {
     
     @IBOutlet weak var swipeableView: ZLSwipeableView!
     @IBOutlet weak var passButton: UIButton!
@@ -58,6 +58,7 @@ class DBHomeViewController: DBBaseViewController {
         swipeableView.onlySwipeTopCard = true
         
         self.addChildViewController(detailVC)
+        
         
         setupSwipeableViewDelegate()
         requestData()
@@ -105,6 +106,9 @@ class DBHomeViewController: DBBaseViewController {
     
     
     func requestData(_ index: Int = 0) {
+        
+        showLoadView()
+        
         var api: DBNetworkAPI = .inTheaters
         switch index {
         case 0:
@@ -141,6 +145,7 @@ class DBHomeViewController: DBBaseViewController {
             DBNetworkProvider.rx.request(api)
                 .mapObject(DBMovie.self)
                 .subscribe(onSuccess: { data in
+                    self.hideLoadView()
                     // 数据处理
                     print(data)
                     self.dataSource = data.subjects
