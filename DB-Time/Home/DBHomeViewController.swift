@@ -28,6 +28,7 @@ class DBHomeViewController: DBBaseViewController {
     private var isShowing: Bool = false
     private var translation: CGPoint = .zero
     
+    private var bottomButtons: [UIButton]!
     private var popListView = DBPopupMovieTypeView()
     
     override func viewDidLoad() {
@@ -46,9 +47,11 @@ class DBHomeViewController: DBBaseViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightMoreButtonDidTap))
         //
-        passButton.clipCorners(corners: [.topRight, .bottomRight], radius: 20)
-        likeButton.clipCorners(corners: [.topLeft, .bottomLeft], radius: 20)
+        passButton.clipCorners(corners: [.topRight, .bottomLeft], radius: 20)
+        likeButton.clipCorners(corners: [.topLeft, .bottomRight], radius: 20)
         superLikeButton.clipCorners(corners: [.topLeft, .topRight], radius: 20)
+        
+        bottomButtons = [passButton, likeButton, superLikeButton]
         
         swipeableView.allowedDirection = [.horizontal, .up]
         swipeableView.numberOfActiveView = 3
@@ -88,6 +91,18 @@ class DBHomeViewController: DBBaseViewController {
 //            }
 //        }
     }
+    
+    @IBAction func bottomButtonsAction(_ sender: UIButton) {
+        switch sender {
+        case passButton:
+            self.swipeableView.swipeTopView(inDirection: .left)
+        case likeButton:
+            self.swipeableView.swipeTopView(inDirection: .right)
+        default:
+            self.swipeableView.swipeTopView(inDirection: .up)
+        }
+    }
+    
     
     func requestData(_ index: Int = 0) {
         var api: DBNetworkAPI = .inTheaters
@@ -197,47 +212,42 @@ extension DBHomeViewController {
         
         /// Swiping at view location
         swipeableView.swiping = { view, location, translation in
-                guard let containerView = view as? DBMovieCardContainer, let cellView = containerView.card else { return }
+//            guard let containerView = view as? DBMovieCardContainer, let cellView = containerView.card else { return }
             let limit: CGFloat = 30.0
+            let distance = (SCREEN_WIDTH - 20 * 4) / 3 + 20
+            
             if (translation.y < -limit * CGFloat(3)) {
-                if (translation.x < -limit * CGFloat(2)) {
-                    let alpha = min(1.0, (abs(translation.x) - limit * CGFloat(2)) / limit)
-//                    cellView.swipeToLeft(withAlpha: alpha)
-                    self.passButton.transform = CGAffineTransform(scaleX: 1 + alpha, y: 1)
-                } else if (translation.x > limit * CGFloat(2)) {
-                    let alpha = min(1.0, (abs(translation.x) - limit * CGFloat(2)) / limit)
-//                    cellView.swipeToRight(withAlpha: alpha)
-                } else {
-                    let alpha = min(1.0, (abs(translation.y) - limit * CGFloat(3)) / limit)
-//                    cellView.swipeToUp(withAlpha: alpha)
-                }
+
             } else {
-//                cellView.swipeToUp(withAlpha: 0.0)
-                if (translation.x < -limit) {
-                    let alpha = min(1.0, (abs(translation.x) - limit) / limit)
-//                    cellView.swipeToLeft(withAlpha: alpha)
-                } else if (translation.x > limit) {
-                    let alpha = min(1.0, (abs(translation.x) - limit) / limit)
-//                    cellView.swipeToRight(withAlpha: alpha)
-                }
+                UIView.animate(withDuration: 0.25, animations: {
+                    if (translation.x < -limit) {
+                        self.likeButton.transform = CGAffineTransform(translationX: distance, y: 0)
+                    } else if (translation.x > limit) {
+                        self.passButton.transform = CGAffineTransform(translationX: -distance, y: 0)
+                    }
+                })
             }
             
             if (translation.y < 0 && abs(translation.x) < limit * CGFloat(2)) {
-                let scaleY = 1.0 + min(abs(translation.y), 100) * 0.002
                 UIView.animate(withDuration: 0.25, animations: {
-                    self.superLikeButton.transform = CGAffineTransform(scaleX: scaleY, y: scaleY)
-                    self.likeButton.transform = .identity
-                    self.passButton.transform = .identity
+                    self.likeButton.transform = CGAffineTransform(translationX: distance, y: 0)
+                    self.passButton.transform = CGAffineTransform(translationX: -distance, y: 0)
+                    self.superLikeButton.transform = .identity
+                    self.bottomButtons.filter({ $0 != self.superLikeButton }).forEach({ $0.backgroundColor = UIColor.orange })
+                    self.superLikeButton.backgroundColor = UIColor(r: 0, g: 172, b: 98)
                 })
             } else {
-                let scaleX = 1.0 + min(abs(translation.x), 100) * 0.002;
                 UIView.animate(withDuration: 0.25, animations: {
                     if translation.x > 0 {
-                        self.likeButton.frame.size.width *= scaleX
+                        self.likeButton.transform = CGAffineTransform(translationX: -distance, y: 0)
+                        self.bottomButtons.filter({ $0 != self.likeButton }).forEach({ $0.backgroundColor = UIColor.orange })
+                        self.likeButton.backgroundColor = UIColor(r: 0, g: 172, b: 98)
                     } else {
-                        self.passButton.transform = CGAffineTransform(scaleX: scaleX, y: 1)
+                        self.passButton.transform = CGAffineTransform(translationX: distance, y: 0)
+                        self.bottomButtons.filter({ $0 != self.passButton }).forEach({ $0.backgroundColor = UIColor.orange })
+                        self.passButton.backgroundColor = UIColor(r: 0, g: 172, b: 98)
                     }
-                    self.superLikeButton.transform = .identity
+                    self.superLikeButton.transform = CGAffineTransform(translationX: 0, y: 50)
                 })
             }
 //            self.translation = translation
@@ -266,18 +276,30 @@ extension DBHomeViewController {
             if cardView.subviews.contains(self.detailVC.view) {
                 self.detailVC.view?.removeFromSuperview()
             }
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.superLikeButton.transform = .identity
+                self.likeButton.transform = .identity
+                self.passButton.transform = .identity
+                
+                self.bottomButtons.filter({ $0 != self.superLikeButton }).forEach({ $0.backgroundColor = UIColor.orange })
+                self.superLikeButton.backgroundColor = UIColor(r: 0, g: 172, b: 98)
+            })
         }
         
         /// Did cancel swiping view
         swipeableView.didCancel = {view in
             //print("Did cancel swiping view")
-            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
+//            guard let containerView = view as? DBMovieCardContainer, let cardView = containerView.card else { return }
 //            cardView.reset()
             
             UIView.animate(withDuration: 0.25, animations: {
                 self.superLikeButton.transform  = .identity
                 self.likeButton.transform       = .identity
                 self.passButton.transform       = .identity
+                
+                self.bottomButtons.filter({ $0 != self.superLikeButton }).forEach({ $0.backgroundColor = UIColor.orange })
+                self.superLikeButton.backgroundColor = UIColor(r: 0, g: 172, b: 98)
             })
         }
         
