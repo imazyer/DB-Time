@@ -10,9 +10,32 @@ import UIKit
 
 class DBMusicViewController: DBBaseViewController {
 
+    private var tableView: UITableView!
+    // ViewModel
+    private var viewModel: DBMusicViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // init tableView
+        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell_id")
+        view.addSubview(tableView)
+        
+        viewModel = DBMusicViewModel()
+        
+        // 将数据绑定到表格
+        viewModel.vmDatas.asObservable().do(onNext: { element in
+            // dismiss hud
+//            print("request Next：", element)
+        }).bind(to: tableView.rx.items) { (tableView, row, element) in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_id")!
+            cell.textLabel?.text = "\(element.title)"
+            print(element)
+            cell.accessoryType = .disclosureIndicator
+            return cell
+            }.disposed(by: disposeBag)
+        
         view.backgroundColor = UIColor.random()
         navigationItem.title = "音乐"
         
@@ -23,6 +46,10 @@ class DBMusicViewController: DBBaseViewController {
         leftBarItemButton.addTarget(self, action: #selector(leftBarButtonItemDidTap), for: .touchUpInside)
         leftBarItemButton.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarItemButton)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
     }
     
     @objc func leftBarButtonItemDidTap() {

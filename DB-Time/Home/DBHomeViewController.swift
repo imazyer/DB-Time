@@ -47,9 +47,9 @@ class DBHomeViewController: DBBaseViewController, DBHomeLoadViewProtocol {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightMoreButtonDidTap))
         //
-        passButton.clipCorners(corners: [.topRight, .bottomLeft], radius: 20)
-        likeButton.clipCorners(corners: [.topLeft, .bottomRight], radius: 20)
-        superLikeButton.clipCorners(corners: [.topLeft, .topRight], radius: 20)
+//        passButton.clipCorners(corners: [.topRight, .bottomLeft], radius: 20)
+//        likeButton.clipCorners(corners: [.topLeft, .bottomRight], radius: 20)
+//        superLikeButton.clipCorners(corners: [.topLeft, .topRight], radius: 20)
         
         bottomButtons = [passButton, likeButton, superLikeButton]
         
